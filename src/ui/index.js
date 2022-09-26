@@ -3,11 +3,13 @@ const toastElement = document.querySelector("#toast");
 
 const dropArea = document.querySelector(".drag-area");
 const fileNameElement = document.querySelector("#filename");
-// const uploadFormElement = document.querySelector("#uploadform");
 const uploadButtonElement = document.querySelector("#uploadButton");
 const uplaodInputElement = document.querySelector("#fileUpload");
 
-const algorithm = document.querySelector('#menu-algorithm').value;
+const algorithm = document.querySelector('#menu-algorithm');
+
+
+
 
 const selectFilebutton = document.querySelector("#drag-area-button");
 selectFilebutton.onclick = () => {
@@ -35,11 +37,22 @@ const handleRequest = () => {
   formData.append('file', uplaodInputElement.files[0])
 
   if(fileUpload){    
-    renderProject(parseInt(algorithm))
+    renderProject(parseInt(algorithm.value))
 
   }else {
     return creatToast('toast_error', ' Nenhum arquivo selecionado')
   }
+}
+
+const setSelectOptions = () => {
+
+  const selectOptions = `
+    <option class="algorithm-option" value="0">Objects behavior visual analysis system</option>
+    <option class="algorithm-option" value="1">algorithm 2</option>
+    <option class="algorithm-option" value="2">algorithm 3</option>
+  `;
+
+  algorithm.innerHTML = selectOptions;
 }
 
 //toast type - toast_error / toast_warning / toast_success
@@ -62,6 +75,10 @@ function saveToStorage(item, data) {
 function getToStorage(item) {
   return JSON.parse(localStorage.getItem(item));
 }
+
+
+
+setSelectOptions();
 
 // handleSelectedElement()
 
