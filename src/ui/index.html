@@ -42,22 +42,29 @@
           <div class="title">
             Sistema de análise visual de objetos em vídeos de vigilância
           </div>
-          <div class="content__input">
-            <select class="algorithm" id="menu-algorithm" selected="0">
-              <!-- <option class="algorithm-option" value="0">Objects behavior visual analysis system</option> -->
-              <!-- <option class="algorithm-option" value="1">Alphabeta</option> -->
-            </select>
-          </div>
-          <div class="drag-area">
-            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-            <header>Arraste e solte para carregar um arquivo</header>
-            <span>ou</span>
-            <button id="drag-area-button">Escolha um arquivo</button>
-            <input type="file" id="fileUpload" hidden>
-          </div>
 
-          <div class="button_content">
-            <button class="saveButton" onclick="handleRequest()" id="uploadButton"> Carregar sistema </button>
+          
+          <div class="teste">
+        
+            
+            <div class="content__input">
+              <!-- selected="0" -->
+              <select class="algorithm" id="menu-algorithm" placeholder="Selecione como deseja realizar a analize">
+                <!-- <option class="algorithm-option" value="0">Objects behavior visual analysis system</option> -->
+                <!-- <option class="algorithm-option" value="1">Alphabeta</option> -->
+              </select>
+            </div>
+            <div class="drag-area">
+              <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+              <header>Arraste e solte o video para fazer upload</header>
+              <span>ou</span>
+              <button id="drag-area-button">Selecione o arquivo</button>
+              <input type="file" id="fileUpload" hidden>
+            </div>
+
+            <div class="button_content">
+              <button class="nextButton" onclick="handleNextPage()"> Proximo </button>
+            </div>
           </div>
      
         </div>  

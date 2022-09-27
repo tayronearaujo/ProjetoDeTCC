@@ -8,7 +8,9 @@ const uplaodInputElement = document.querySelector("#fileUpload");
 
 const algorithm = document.querySelector('#menu-algorithm');
 
+const teste = document.querySelector(".teste");
 
+const spinner = `<span class="loader"></span>`;
 
 
 const selectFilebutton = document.querySelector("#drag-area-button");
@@ -28,7 +30,10 @@ uplaodInputElement.addEventListener("change", (event) => {
     <span>${uplaodInputElement.files[0].name}</span>
   `;
 
-  dropArea.innerHTML = fileNameTag;
+  dropArea.innerHTML = spinner;
+
+  setTimeout(() => { dropArea.innerHTML = fileNameTag; }, 3000);
+  
 });
 
 const handleRequest = () => {
@@ -44,12 +49,33 @@ const handleRequest = () => {
   }
 }
 
+const handleNextPage = () =>{
+  const x = `
+    <div class="button_content">
+    <button class="saveButton" onclick="" id="uploadButton"> Extrair Informações  </button>
+    </div>
+
+    <div class="button_content">
+    <button class="saveButton" onclick="" id="uploadButton"> Carregar Informações </button>
+    </div>
+  `
+
+  
+  dropArea.innerHTML = spinner;
+
+  setTimeout(() => { teste.innerHTML = x;}, 3000);
+  
+  
+}
+
+
 const setSelectOptions = () => {
 
   const selectOptions = `
+    <option value="" disabled selected>Selecione como deseja realizar sua analize</option>
     <option class="algorithm-option" value="0">Objects behavior visual analysis system</option>
-    <option class="algorithm-option" value="1">algorithm 2</option>
-    <option class="algorithm-option" value="2">algorithm 3</option>
+    <option class="algorithm-option" value="1">Analysis X</option>
+    <option class="algorithm-option" value="2">Analysis Y</option>
   `;
 
   algorithm.innerHTML = selectOptions;
