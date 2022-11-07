@@ -58,12 +58,34 @@
               <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
               <header>Arraste e solte o video para fazer upload</header>
               <span>ou</span>
-              <button id="drag-area-button">Selecione o arquivo</button>
+              <button id="drag-area-button">Selecione seu diretório de setup</button>
               <input type="file" id="fileUpload" hidden>
             </div>
 
+            <!-- <fieldset>
+              <legend>Select a maintenance drone:</legend>
+          
+              <div>
+                <input type="radio" id="huey" name="drone" value="huey"
+                       checked>
+                <label for="huey">Huey</label>
+              </div>
+          
+              <div>
+                <input type="radio" id="dewey" name="drone" value="dewey">
+                <label for="dewey">Dewey</label>
+              </div>
+          
+              <div>
+                <input type="radio" id="louie" name="drone" value="louie">
+                <label for="louie">Louie</label>
+              </div>
+            </fieldset> -->
+
             <div class="button_content">
-              <button class="nextButton" onclick="handleNextPage()"> Proximo </button>
+              <button class="saveButton" onclick="handleRequest()" id="uploadButton"> Carregar sistema </button>
+              <!-- <button class="nextButton" onclick="handleNextPage()"> Proximo </button> -->
+              
             </div>
           </div>
      

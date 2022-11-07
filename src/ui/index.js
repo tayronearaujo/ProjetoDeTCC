@@ -32,7 +32,7 @@ uplaodInputElement.addEventListener("change", (event) => {
 
   dropArea.innerHTML = spinner;
 
-  setTimeout(() => { dropArea.innerHTML = fileNameTag; }, 3000);
+  setTimeout(() => { dropArea.innerHTML = fileNameTag; }, 1000);
   
 });
 
@@ -59,13 +59,9 @@ const handleNextPage = () =>{
     <button class="saveButton" onclick="" id="uploadButton"> Carregar Informações </button>
     </div>
   `
-
-  
   dropArea.innerHTML = spinner;
 
-  setTimeout(() => { teste.innerHTML = x;}, 3000);
-  
-  
+  setTimeout(() => { teste.innerHTML = x;}, 2000);
 }
 
 
