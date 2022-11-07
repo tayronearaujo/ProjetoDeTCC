@@ -23,8 +23,9 @@ module.exports = {
   },
   fileFilter: (req, file, cb) => {
     const allowedMimes = [
-      // "image/jpeg",
-      // "image/png",
+      "image/jpeg",
+      "image/png",
+      "application/x-freearc",
       "video/mp4",
       "video/webm",
       "video/ogg",
@@ -32,6 +33,7 @@ module.exports = {
     ];
 
     if (allowedMimes.includes(file.mimetype)) {
+      console.log("FILE TYPE =>>>>>>>>>>>",file.mimetype)
       cb(null, true);
     } else {
       cb(new Error("Invalid file type."));
