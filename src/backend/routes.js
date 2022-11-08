@@ -5,7 +5,6 @@ const multerConfig = require("./config/multer");
 routes.post("/posts", multer(multerConfig).single("file"), async (req, res) => {
   const {originalName, mimetype, filename} = req;
 
-
   const reqObjetct = {
     fileName: originalName,
     fileType: mimetype,

@@ -29,12 +29,27 @@ uplaodInputElement.addEventListener("change", (event) => {
   dropArea.innerHTML = fileNameTag;
 });
 
-const handleRequest = () => {
+const handleRequest = async () => {
   const fileUpload = uplaodInputElement.files[0]
   const formData = new FormData()
   formData.append('file', uplaodInputElement.files[0])
 
-  if(fileUpload){    
+  console.log(fileUpload)
+
+  try {
+    const response = fetch('http://localhost:3000/posts', {
+      method: 'POST',
+      body: formData
+    })
+
+    const responseApi = response.json()
+    console.log(responseApi)
+
+  } catch (error) {
+    console.error(error)
+  }
+  
+  if(fileUpload){ 
     renderProject(parseInt(algorithm))
 
   }else {
@@ -64,18 +79,3 @@ function getToStorage(item) {
 }
 
 // handleSelectedElement()
-
-// fetch('http://localhost:3000/posts', {
-//   method: 'POST',
-//   body: formData
-// })
-// .then(res => { 
-  
-//   console.log(res.json())
-
-// })
-// .then(json => {
-//   // creatToast('toast_success', 'Arquivo gravado')
-//   console.log(json)
-// })
-// .catch(err => console.error(err));
