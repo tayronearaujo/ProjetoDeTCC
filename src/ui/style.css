@@ -26,35 +26,6 @@ body{
     padding-left: 20px;
 }
 
- .navbar__search{
-     width: 60%;
-     position: relative;
-     display: none;
- }
- 
- .navbar__search__input{
-     width: 100%;
-     border:none;
-     outline: none;
-     border-radius: 50px;
-     padding: 8px;
-     padding-left: 40px;
-     font-size: 16px;
-     font-weight: bolder;
- }
-
- .navbar__search__input::placeholder{
-     color:#2f3d4f;
- }
-
- .navbar__search__input__icon{
-    color:#aebb3f;
-    position:absolute;
-    left: 0;
-    top: 8px;
-    padding: 0px 0px 0px 10px;
- }
- 
 .navbar__user{
     padding-right: 20px;
     color: #ffffff;
@@ -64,42 +35,6 @@ body{
     display:flex;    
 }
 
-.content__sidebar{
-    width:200px;
-    height: 100%;
-    padding: 10px 0;
-    box-shadow: 2px 0px 4px 4px rgba(219,216,219,1);
-    font-size: 20px;
-    background-color:#ffffff;
-    z-index:1;
-    margin-top: 70px;
-    position: fixed;
-    color:#87868c;
-}
-#list__all{
-    color:#aebb3f;
-    cursor: pointer;
-}
-
-.content__sidebar__list__item{
-    padding: 5px 10px;
-    margin: 25px 10px 10px 10px;
-}
-
-.content__sidebar__list__item:hover{
-   color: #343465;
-}
-
-
-#list__item__select{
-    color:#aebb3f;
-    cursor: pointer;
-}
-
-#list__item__no__select{
-    color:#87868c;
-    cursor: pointer;
-}
 
 .content__toast{
     visibility: hidden;
@@ -111,7 +46,6 @@ body{
     display: flex;
     align-items: center;
 }
-
 
 .toast_warning{
     visibility: visible;
@@ -172,21 +106,18 @@ body{
     margin-top: 100px;    
 }
 
-.content_main_list{
-    width: 60%;
+.content_elements {
+
     margin: 0 auto;
-    padding: 0px;
+    padding: 30px 15px;
     background-color: #fff;
     box-shadow: 0px 1px 4px 4px rgba(219,216,219,1);
     border-radius: 5px;
-}
-
-.content__input{
-    width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
+
 
 .algorithm{
     width: 80%;
@@ -215,15 +146,54 @@ ul {
 	list-style: none;
 }
 
+.drag-area .icon{
+    font-size: 80px;
+    color: #343465;
+}
+
 .title{
-	padding: 15px;
+	
 	font-size: 24px;
-	text-align: center;
-    margin-bottom: 30px;
-    color: #fff;
-    background: #333467;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;	
+    color: #ffffff;
+}
+
+.file_info {
+    width: 80%;
+    margin-bottom: 50px;
+
+}
+
+.file_info h1, p{
+
+    margin-bottom: 20px
+    
+}
+
+.file_info  p{
+
+   font-weight: bold;
+    
+}
+
+.file_info .title{
+	
+	font-size: 24px;
+    color: #343465;
+}
+
+.file_info .icon{
+    font-size: 30px;
+    color: #343465;
+}
+
+
+code {
+    background-color: #eee;
+    border-radius: 3px;
+    display: block;
+    font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
+    padding: 10px;
+    height: 200px;
 }
 
 .choose_file{
@@ -252,6 +222,23 @@ ul {
     font-size: 14px;
 }
 
+.files_list{
+    border: 2px solid #343465;
+    width: 80%;
+    border-radius: 5px;
+    margin-top: 3%;
+}
+
+.files_list_row{
+    border-bottom:1px solid #343465;
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+    padding:15px;
+
+}
+
 .drag-area{
     border: 2px dashed #343465;
     width: 80%;
@@ -264,57 +251,16 @@ ul {
     margin: 0 auto;
 }
 
-.drag-area.active{
-    border: 2px solid #343465;
-}
-
-.drag-area .icon{
-    font-size: 80px;
-    color: #343465;
-}
-
-.drag-area header{
-    font-size:20px;
-    font-weight: 500;
-    color: #343465;
-}
-
-.drag-area span{
-    font-size: 20px;
-    font-weight: 500;
-    color: #343465;
-    margin: 10px 0 15px 0;
-}
-
-.drag-area button{
-    padding: 8px 20px;
-    font-size: 20px;
-    font-weight: 500;
-    border: none;
-    outline: none;
-    background: #343465;
-    color: #ffffff;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.button_content{
-    display: flex;
-    justify-content: center;
-    padding: 15px 20px;
-}
 
 .saveButton {
-    width: 84%;
+    width: 80%;
     height: 40px;
     font-size: 18px;
     border: none;
     border-radius: 5px;
     background-color: #343465;
     color: #f3f3f3;
-    margin: 0 auto;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    margin-top: 10%;
     cursor: pointer;
 }
 

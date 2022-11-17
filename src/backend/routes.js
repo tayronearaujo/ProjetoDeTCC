@@ -2,7 +2,8 @@ const routes = require("express").Router();
 const multer = require("multer");
 const multerConfig = require("./config/multer");
 
-routes.post("/posts", multer(multerConfig).single("file"), async (req, res) => {
+routes.post("/posts", multer(multerConfig).array("uploadFiles", 2), async (req, res) => {
+ 
   const {originalName, mimetype, filename} = req;
 
   const reqObjetct = {
@@ -11,7 +12,7 @@ routes.post("/posts", multer(multerConfig).single("file"), async (req, res) => {
     savedFileName: filename
   }
 
-  return res.json({response: reqObjetct});
+  return res.json("sucess");
 });
 
 
