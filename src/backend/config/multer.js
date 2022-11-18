@@ -24,10 +24,9 @@ module.exports = {
   },
   fileFilter: (req, file, cb) => {
     const allowedMimes = [
-      "application/vnd.rar",
       "video/mp4",
-      "video/webm",
-      "video/ogg",
+      // "video/webm",
+      // "video/ogg",
       "application/json"
     ];
 

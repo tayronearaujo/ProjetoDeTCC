@@ -81,10 +81,11 @@ const exempleJsonData = () => {
 const handleFile = (files) => {
   const objKeys = ["frame", "cx", "cy", "dx", "dy"]
   let validFile = true
+
   const reader = new FileReader();
 
   reader.onload = (event) => {
-    let data = event.target.result;
+    let data = event.target.result;    
     data = JSON.parse(data)
 
     console.log(data)
@@ -113,8 +114,6 @@ const handleRequest = async () => {
   const fileUpload = uplaodInputElement.files[0]
   const formData = new FormData()
   formData.append('file', uplaodInputElement.files[0])
-
-  console.log(fileUpload)
 
   try {
     const response = fetch('http://localhost:3000/posts', {
@@ -159,4 +158,3 @@ function getToStorage(item) {
 }
 
 setSelectOptions()
-exempleJsonData()
