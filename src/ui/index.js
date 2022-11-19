@@ -6,14 +6,12 @@ const filesListNames = document.querySelector("#files-list");
 const uploadButtonElement = document.querySelector("#uploadButton");
 const uplaodInputElement = document.querySelector("#fileUpload");
 const algorithm = document.querySelector('#menu-algorithm');
-
 const codeSnippet = document.querySelector('#code-snippet');
 
-
-// const selectFilebutton = document.querySelector("#drag-area-button");
-// selectFilebutton.onclick = () => {
-//   uplaodInputElement.click();
-// }
+const selectFilebutton = document.querySelector("#drag-area-button");
+selectFilebutton.onclick = () => {
+  uplaodInputElement.click();
+}
 
 const renderProject = (type) => {
   const project = type === '0' ? `<iframe src="http://127.0.0.1:5501/index.html" class="iframe"></iframe>` : '<iframe src="http://127.0.0.1:5501/index.html" class="iframe"></iframe>';
@@ -24,10 +22,10 @@ uplaodInputElement.addEventListener("change", (event) => {
   event.preventDefault()
   const list = []
 
- for (let i = 0; i < uplaodInputElement.files.length; i++) {
-  list.push(uplaodInputElement.files[i].name)
-  
- }
+  for (let i = 0; i < uplaodInputElement.files.length; i++) {
+    list.push(uplaodInputElement.files[i].name)
+
+  }
   handleUploadFilesList(list)
 });
 
@@ -38,7 +36,6 @@ const handleUploadFilesList = (filesItem) => {
   ).join('')}`
   filesListNames.innerHTML = renderList;
 }
-
 
 const setSelectOptions = () => {
   const selectOptions = `
@@ -52,47 +49,114 @@ const setSelectOptions = () => {
 }
 
 const exempleJsonData = () => {
-  const snippet = {
+  const snippet = [{
     "label": "person0",
     "trajectory": [
       {
-          "frame": 40,
-          "cx": 78,
-          "cy": 67,
-          "dx": 11,
-          "dy": 7
+        "frame": 40,
+        "cx": 78,
+        "cy": 67,
+        "dx": 11,
+        "dy": 7
       },
       {
-          "frame": 41,
-          "c": 78,
-          "cy": 68,
-          "dx": 11,
-          "dy": 8
+        "frame": 41,
+        "c": 78,
+        "cy": 68,
+        "dx": 11,
+        "dy": 8
+      }
+    ]
+  },
+  {
+    "label": "person1",
+    "trajectory": [
+      {
+        "frame": 40,
+        "cx": 78,
+        "cy": 67,
+        "dx": 11,
+        "dy": 7
+      },
+      {
+        "frame": 41,
+        "c": 78,
+        "cy": 68,
+        "dx": 11,
+        "dy": 8
+      }
+    ]
+  },
+  {
+    "label": "person2",
+    "trajectory": [
+      {
+        "frame": 40,
+        "cx": 78,
+        "cy": 67,
+        "dx": 11,
+        "dy": 7
+      },
+      {
+        "frame": 41,
+        "c": 78,
+        "cy": 68,
+        "dx": 11,
+        "dy": 8
+      }
+    ]
+  },
+  {
+    "label": "person3",
+    "trajectory": [
+      {
+        "frame": 40,
+        "cx": 78,
+        "cy": 67,
+        "dx": 11,
+        "dy": 7
+      },
+      {
+        "frame": 41,
+        "c": 78,
+        "cy": 68,
+        "dx": 11,
+        "dy": 8
       }
     ]
   }
+  ]
+  const arr = []
 
+  snippet.map(element => {
+    arr.push({ "label" : element.label, "start" : element.trajectory[0].frame, "finish": element.trajectory.at(-1).frame, "meeting" : 0},)
+    
+  })
+
+  console.log(arr)
   let teste = { foo: "sample", bar: "sample" };
 
 
-  codeSnippet.innerHTML = JSON.stringify(teste, null, 4);
+  //codeSnippet.innerHTML = JSON.stringify(teste, null, 4);
 }
 
 const handleFile = (files) => {
   const objKeys = ["frame", "cx", "cy", "dx", "dy"]
   let validFile = true
 
+  console.log('files ', files)
+
   const reader = new FileReader();
 
   reader.onload = (event) => {
-    let data = event.target.result;    
+    let data = event.target.result;
     data = JSON.parse(data)
 
-    console.log(data)
+    console.log('data ', data)
 
     validFile = data.hasOwnProperty("label")
     validFile = data.hasOwnProperty("trajectory")
-    data.trajectory.map(obj =>{
+    data.trajectory.map(obj => {
       for (var i = 0; i < objKeys.length; i++) {
         validFile = obj.hasOwnProperty(objKeys[i])
         if (!obj.hasOwnProperty(objKeys[i])) {
@@ -102,10 +166,10 @@ const handleFile = (files) => {
       }
     })
 
-    console.log(validFile ? 'Arquivo com Formato correto' : 'Arquivo com Formato incorreto')
+    console.log(validFile ? 'Arquivo com formato correto' : 'Arquivo com formato incorreto')
 
-    saveToStorage('validFile', {validFile: validFile})
-  } 
+    saveToStorage('validFile', { validFile: validFile })
+  }
 
   reader.readAsText(files[0]);
 }
@@ -127,11 +191,11 @@ const handleRequest = async () => {
   } catch (error) {
     console.error(error)
   }
-  
-  if(fileUpload){ 
+
+  if (fileUpload) {
     renderProject(parseInt(algorithm.value))
 
-  }else {
+  } else {
     return creatToast('toast_error', ' Nenhum arquivo selecionado')
   }
 }
@@ -158,3 +222,4 @@ function getToStorage(item) {
 }
 
 setSelectOptions()
+exempleJsonData()

@@ -11,12 +11,9 @@
 
   <body>
     <nav class="navbar">
-  
       <a class="navbar__brand"> <img src="../assets/image.png" class="navbar__brand__img" alt="Logo UFU" /></a>
       <div class="navbar__search">
-        
         <h1 class="title">Sistema de análise visual de objetos em vídeos de vigilância</h1>
-       
       </div>
       <a class="navbar__user"> <i class="fas fa-user-circle fa-2x"></i> </a>
     </nav>
@@ -32,27 +29,22 @@
             <h1 class="title">Para que o sistema funcione corretamente, é necessário:</h1>
               <p> 
                 <i class="fa-solid fa-file-arrow-down icon"></i>
-                 Arquivo de video formato: 
+                 Arquivo de vídeo formato: 
               </p>
               <code>.mp4</code> 
               <p> 
                 <i class="fa-sharp fa-solid fa-file-video icon"></i> 
-                Arquivo com sua anlise de frames formato: 
+                Arquivo com sua análise de frames formato: 
               </p>
                 <code>.json</code> 
-                <!-- <p>com a seguinte interface:</p>
-              <code id="code-snippet">
-                
-              </code> -->
-
           </div>
-          <input type="file" id="fileUpload" name="uploadFiles" multiple onchange="handleFile(this.files)">
+          <button class="file_upload" id="drag-area-button" >Selecionar arquivos</button>
+          <input type="file" id="fileUpload" name="uploadFiles" multiple onchange="handleFile(this.files)" hidden>
 
           <ul class="files_list" id="files-list">
-            <li class="files_list_row">.....</li>
+            <li class="files_list_row">No file</li>
           </ul>
 
-        
           <button class="saveButton" onclick="handleRequest()" id="uploadButton"> Carregar sistema </button>
         </div>  
       </section>
