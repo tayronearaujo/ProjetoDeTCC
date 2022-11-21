@@ -7,31 +7,41 @@ const uploadButtonElement = document.querySelector("#uploadButton");
 const uplaodInputElement = document.querySelector("#fileUpload");
 const algorithm = document.querySelector('#menu-algorithm');
 const codeSnippet = document.querySelector('#code-snippet');
-
 const selectFilebutton = document.querySelector("#drag-area-button");
+
 selectFilebutton.onclick = () => {
   uplaodInputElement.click();
 }
 
 const renderProject = (type) => {
+  console.log('renderProject -->',type)
   const project = type === '0' ? `<iframe src="http://127.0.0.1:5501/index.html" class="iframe"></iframe>` : '<iframe src="http://127.0.0.1:5501/index.html" class="iframe"></iframe>';
   listElement.innerHTML = project;
 }
 
 uplaodInputElement.addEventListener("change", (event) => {
   event.preventDefault()
-  const list = []
+  const filesListNames = []
+  const jsonFileList = []
+  const inputFiles = uplaodInputElement.files
+  
+  for (let i = 0; i < inputFiles.length; i++) {
+    filesListNames.push(inputFiles[i].name)
 
-  for (let i = 0; i < uplaodInputElement.files.length; i++) {
-    list.push(uplaodInputElement.files[i].name)
+    if(inputFiles[i].name.includes('.json'))
+      jsonFileList.push(inputFiles[i])
 
   }
-  handleUploadFilesList(list)
+  handleFile(jsonFileList)
+  handleUploadFilesList(filesListNames)
 });
 
 const handleUploadFilesList = (filesItem) => {
   const renderList = `${filesItem.map(listItemName => `
-    <li class="files_list_row"> ${listItemName}</li>
+    <li class="files_list_row"> 
+      <i class="fa-solid fa-file-arrow-down icon"></i>
+      ${listItemName}
+    </li>
     `
   ).join('')}`
   filesListNames.innerHTML = renderList;
@@ -48,130 +58,68 @@ const setSelectOptions = () => {
   algorithm.innerHTML = selectOptions;
 }
 
-const exempleJsonData = () => {
-  const snippet = [{
-    "label": "person0",
-    "trajectory": [
-      {
-        "frame": 40,
-        "cx": 78,
-        "cy": 67,
-        "dx": 11,
-        "dy": 7
-      },
-      {
-        "frame": 41,
-        "c": 78,
-        "cy": 68,
-        "dx": 11,
-        "dy": 8
-      }
-    ]
-  },
-  {
-    "label": "person1",
-    "trajectory": [
-      {
-        "frame": 40,
-        "cx": 78,
-        "cy": 67,
-        "dx": 11,
-        "dy": 7
-      },
-      {
-        "frame": 41,
-        "c": 78,
-        "cy": 68,
-        "dx": 11,
-        "dy": 8
-      }
-    ]
-  },
-  {
-    "label": "person2",
-    "trajectory": [
-      {
-        "frame": 40,
-        "cx": 78,
-        "cy": 67,
-        "dx": 11,
-        "dy": 7
-      },
-      {
-        "frame": 41,
-        "c": 78,
-        "cy": 68,
-        "dx": 11,
-        "dy": 8
-      }
-    ]
-  },
-  {
-    "label": "person3",
-    "trajectory": [
-      {
-        "frame": 40,
-        "cx": 78,
-        "cy": 67,
-        "dx": 11,
-        "dy": 7
-      },
-      {
-        "frame": 41,
-        "c": 78,
-        "cy": 68,
-        "dx": 11,
-        "dy": 8
-      }
-    ]
-  }
-  ]
+const timeBarsInput = (object) => {
   const arr = []
-
-  snippet.map(element => {
-    arr.push({ "label" : element.label, "start" : element.trajectory[0].frame, "finish": element.trajectory.at(-1).frame, "meeting" : 0},)
-    
+  object.map(element => {
+    arr.push({ "label" : element.label, "start" : element.trajectory[0].frame, "finish": element.trajectory.at(-1).frame, "meeting" : 0})
   })
 
-  console.log(arr)
-  let teste = { foo: "sample", bar: "sample" };
-
-
-  //codeSnippet.innerHTML = JSON.stringify(teste, null, 4);
+  console.log({time_bars_input: arr})
 }
 
 const handleFile = (files) => {
-  const objKeys = ["frame", "cx", "cy", "dx", "dy"]
-  let validFile = true
-
-  console.log('files ', files)
-
-  const reader = new FileReader();
+  const reader = new FileReader()
+  let label = false
+  let trajectory = false
+  let frame = false
+  let cx = false
+  let cy = false
+  let dx = false
+  let dy = false
+  let validFile = false
 
   reader.onload = (event) => {
     let data = event.target.result;
     data = JSON.parse(data)
 
-    console.log('data ', data)
+    data.map(obj => {
+      label = obj.hasOwnProperty("label")
+      trajectory = obj.hasOwnProperty("trajectory")
 
-    validFile = data.hasOwnProperty("label")
-    validFile = data.hasOwnProperty("trajectory")
-    data.trajectory.map(obj => {
-      for (var i = 0; i < objKeys.length; i++) {
-        validFile = obj.hasOwnProperty(objKeys[i])
-        if (!obj.hasOwnProperty(objKeys[i])) {
-          validFile = obj.hasOwnProperty(objKeys[i])
-          break;
-        }
-      }
+      obj.trajectory.map(objFrames => {
+        frame = objFrames.hasOwnProperty("frame")
+        cx = objFrames.hasOwnProperty("cx")
+        cy = objFrames.hasOwnProperty("cy")
+        dx = objFrames.hasOwnProperty("dx")
+        dy = objFrames.hasOwnProperty("dy")
+      })
     })
 
-    console.log(validFile ? 'Arquivo com formato correto' : 'Arquivo com formato incorreto')
+    validFile = label && trajectory && frame && cx && cy &&  dx && dy
 
-    saveToStorage('validFile', { validFile: validFile })
+    if(validFile){
+      console.log('Arquivo com formato correto')
+      saveToStorage('validFile', { validFile: validFile })
+      setStatusButton('enabled')
+      timeBarsInput(data)
+    }
+    else {
+      console.error('Arquivo com formato incorreto')
+      setStatusButton("disabled")
+    }
   }
-
   reader.readAsText(files[0]);
+}
+
+const setStatusButton = (status) => {
+  if(status  === "disabled"){
+    uploadButtonElement.disabled = true
+    uploadButtonElement.classList.add("disabledButton");
+  }
+  else {
+    uploadButtonElement.disabled = false
+    uploadButtonElement.classList.remove("disabledButton");
+  } 
 }
 
 const handleRequest = async () => {
@@ -180,7 +128,7 @@ const handleRequest = async () => {
   formData.append('file', uplaodInputElement.files[0])
 
   try {
-    const response = fetch('http://localhost:3000/posts', {
+    const response = fetch('http://localhost:3000/upload', {
       method: 'POST',
       body: formData
     })
@@ -221,5 +169,5 @@ function getToStorage(item) {
   return JSON.parse(localStorage.getItem(item));
 }
 
+setStatusButton("disabled")
 setSelectOptions()
-exempleJsonData()

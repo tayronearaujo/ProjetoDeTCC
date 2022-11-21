@@ -27,25 +27,21 @@
 
           <div class="file_info">
             <h1 class="title">Para que o sistema funcione corretamente, é necessário:</h1>
-              <p> 
-                <i class="fa-solid fa-file-arrow-down icon"></i>
-                 Arquivo de vídeo formato: 
-              </p>
+              <p>Arquivo de vídeo formato:</p>
               <code>.mp4</code> 
-              <p> 
-                <i class="fa-sharp fa-solid fa-file-video icon"></i> 
-                Arquivo com sua análise de frames formato: 
-              </p>
-                <code>.json</code> 
+              <p>Arquivo com sua análise de frames formato: </p>
+              <code>.json</code> 
           </div>
           <button class="file_upload" id="drag-area-button" >Selecionar arquivos</button>
-          <input type="file" id="fileUpload" name="uploadFiles" multiple onchange="handleFile(this.files)" hidden>
-
+          <input type="file" id="fileUpload" name="uploadFiles" multiple  hidden>
+          <!-- onchange="handleFile(this.files)" -->
           <ul class="files_list" id="files-list">
-            <li class="files_list_row">No file</li>
+            <li class="files_list_row"> 
+              <i class="fa-sharp fa-solid fa-file-excel icon"></i>
+            </li>
           </ul>
 
-          <button class="saveButton" onclick="handleRequest()" id="uploadButton"> Carregar sistema </button>
+          <button class="saveButton" onclick="handleRequest()" id="uploadButton" disabled> Carregar sistema </button>
         </div>  
       </section>
     </main>
