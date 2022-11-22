@@ -1,8 +1,6 @@
 const listElement = document.querySelector("#user__list");
-const toastElement = document.querySelector("#toast");
+const toastElement = document.querySelector("#toast1");
 const filesListNames = document.querySelector("#files-list");
-//const fileNameElement = document.querySelector("#filename");
-// const uploadFormElement = document.querySelector("#uploadform");
 const uploadButtonElement = document.querySelector("#uploadButton");
 const uplaodInputElement = document.querySelector("#fileUpload");
 const algorithm = document.querySelector('#menu-algorithm');
@@ -16,7 +14,18 @@ selectFilebutton.onclick = () => {
 const renderProject = (type) => {
   console.log('renderProject -->',type)
   const project = type === '0' ? `<iframe src="http://127.0.0.1:5501/index.html" class="iframe"></iframe>` : '<iframe src="http://127.0.0.1:5501/index.html" class="iframe"></iframe>';
-  listElement.innerHTML = project;
+  //listElement.innerHTML = project;
+}
+
+const setSelectOptions = () => {
+  const selectOptions = `
+    <option value="" disabled selected>Selecione como deseja realizar sua analize</option>
+    <option class="algorithm-option" value="0">Objects behavior visual analysis system</option>
+    <option class="algorithm-option" value="1">Analysis X</option>
+    <option class="algorithm-option" value="2">Analysis Y</option>
+  `;
+
+  algorithm.innerHTML = selectOptions;
 }
 
 uplaodInputElement.addEventListener("change", (event) => {
@@ -45,26 +54,6 @@ const handleUploadFilesList = (filesItem) => {
     `
   ).join('')}`
   filesListNames.innerHTML = renderList;
-}
-
-const setSelectOptions = () => {
-  const selectOptions = `
-    <option value="" disabled selected>Selecione como deseja realizar sua analize</option>
-    <option class="algorithm-option" value="0">Objects behavior visual analysis system</option>
-    <option class="algorithm-option" value="1">Analysis X</option>
-    <option class="algorithm-option" value="2">Analysis Y</option>
-  `;
-
-  algorithm.innerHTML = selectOptions;
-}
-
-const timeBarsInput = (object) => {
-  const arr = []
-  object.map(element => {
-    arr.push({ "label" : element.label, "start" : element.trajectory[0].frame, "finish": element.trajectory.at(-1).frame, "meeting" : 0})
-  })
-
-  console.log({time_bars_input: arr})
 }
 
 const handleFile = (files) => {
@@ -101,7 +90,6 @@ const handleFile = (files) => {
       console.log('Arquivo com formato correto')
       saveToStorage('validFile', { validFile: validFile })
       setStatusButton('enabled')
-      timeBarsInput(data)
     }
     else {
       console.error('Arquivo com formato incorreto')
@@ -123,42 +111,46 @@ const setStatusButton = (status) => {
 }
 
 const handleRequest = async () => {
-  const fileUpload = uplaodInputElement.files[0]
+  const uploadFiles = uplaodInputElement.files
+  const filesListLength = uploadFiles.length
   const formData = new FormData()
-  formData.append('file', uplaodInputElement.files[0])
+  formData.append('uploadFiles', uploadFiles)
+  
+  if(filesListLength === 2){
+    try {
+      const response = fetch('http://localhost:3000/upload', {
+        method: 'POST',
+        body: formData
+      })
+      const responseApi = await response
+    
+      if(responseApi.status === 200){
+        console.log('status 200')
+        renderProject(parseInt(algorithm.value))
+      }
 
-  try {
-    const response = fetch('http://localhost:3000/upload', {
-      method: 'POST',
-      body: formData
-    })
-
-    const responseApi = response.json()
-    console.log(responseApi)
-
-  } catch (error) {
-    console.error(error)
+    } catch (error) {
+      creatToast('toast_error', 'Erro ao enviar arquivos !')
+    }
   }
-
-  if (fileUpload) {
-    renderProject(parseInt(algorithm.value))
-
-  } else {
-    return creatToast('toast_error', ' Nenhum arquivo selecionado')
+  else {
+  filesListLength > 2 ? 
+    creatToast('toast_error', 'Muitos arquivos selecionados para envio !') :
+    creatToast('toast_error', `E necessário enviar mais de ${filesListLength} arquivo !`) 
   }
 }
 
 //toast type - toast_error / toast_warning / toast_success
 function creatToast(type, status) {
   const toast = `
-    <div class="content__toast__element">
-      <i class="fa-solid fa-circle-exclamation fa-2x"></i>
-      <span>&nbsp${status}</span>
-    </div>
+   
+    <i class="fa-solid fa-circle-exclamation fa-1x"></i>
+    <span>&nbsp${status}</span>
+
   `;
   toastElement.innerHTML = toast;
-  toastElement.className = type;
-  setTimeout(() => { toastElement.className = 'content__toast' }, 5000);
+  toastElement.classList.add(type);
+  setTimeout(() => { toastElement.className = 'content__toast' }, 3000);
 }
 
 function saveToStorage(item, data) {

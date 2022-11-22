@@ -14,7 +14,6 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index:2;
     position: fixed;
     width: 100%;
     box-shadow: 0px 6px 8px -2px rgba(130,130,130,0.6);
@@ -38,13 +37,18 @@ body{
 
 .content__toast{
     visibility: hidden;
-    position: fixed;
-    z-index: 2;
+    width: 80%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
 }
 
 .content__toast__element{
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    /* align-items: center; */
 }
 
 .toast_warning{
@@ -62,18 +66,15 @@ body{
 }
 
 .toast_error{
-    justify-content: center;
+  
     visibility: visible;
-    margin-top: 80px;
+    height: 20px;
     background-color: #f8d7da;
     border-color: #f5c2c7;
     color: #842029;
-    width: 80%;
-    padding: 15px;
-    position: fixed;
-    border-radius: 10px;
-    z-index: 2;
-    margin-left: 210px;
+    font-weight: 600;
+    padding: 5px;
+    border-radius: 5px;
     text-align: center;
 }
 
@@ -171,8 +172,6 @@ ul {
     color: #343465;
 }
 
-
-
 code {
     background-color: #eee;
     border-radius: 3px;
@@ -256,7 +255,6 @@ code {
     border-radius: 5px;
     background-color: #343465;
     color: #f3f3f3;
-    margin-top: 6%;
     margin-bottom: 20px;
     cursor: pointer;
 }
@@ -264,7 +262,6 @@ code {
 .disabledButton {
     opacity: 0.4;
     color: #b9b9b9; 
-    margin-top: 6%;
     margin-bottom: 20px;
 }
 

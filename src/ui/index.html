@@ -10,6 +10,7 @@
   </head>
 
   <body>
+    
     <nav class="navbar">
       <a class="navbar__brand"> <img src="../assets/image.png" class="navbar__brand__img" alt="Logo UFU" /></a>
       <div class="navbar__search">
@@ -19,8 +20,6 @@
     </nav>
 
     <main class="content">
-      <div id="toast" class="content__toast"></div>
-
       <section id="user__list" class="content__main">
         <div class="content_elements">
           <select class="algorithm" id="menu-algorithm" selected="0" required></select>
@@ -40,6 +39,13 @@
               <i class="fa-sharp fa-solid fa-file-excel icon"></i>
             </li>
           </ul>
+
+          <div id="toast" class="content__toast">
+            <div class="content__toast__element" id="toast1">
+              <!-- <i class="fa-solid fa-circle-exclamation fa-1x"></i>
+              <span>&nbsp${status}</span> -->
+            </div>
+          </div>
 
           <button class="saveButton" onclick="handleRequest()" id="uploadButton" disabled> Carregar sistema </button>
         </div>  
