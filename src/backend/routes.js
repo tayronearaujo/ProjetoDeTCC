@@ -1,15 +1,28 @@
+
+const { execFile } = require('child_process');
 const util = require("util");
+//const { PythonShell } = require('python-shell');
 const routes = require("express").Router();
 const multer = require("multer");
 const multerConfig = require("./config/multer");
+const { stdout } = require('process');
 
 routes.post("/upload", multer(multerConfig).array("uploadFiles", 2), async (req, res) => {
-
-  // console.log(req.body.file)
-
   return res.json("Sucess send files");
 });
 
-const uploadFilesMiddleware = util.promisify(routes);
+routes.get("/videoProcess", async (req, res) => {
+  const py = execFile('python', ['src/modules/videoProcess/main.py'], (error, stdout, stderr) => {
+    if (error || stderr) {
+     console.log('error',error)
+    } else {
+      console.log(stdout)
+    
+      res.send(stdout)
+    }
+  })
+});
 
-module.exports = uploadFilesMiddleware;
+//const uploadFilesMiddleware = util.promisify(routes);
+
+module.exports = routes;

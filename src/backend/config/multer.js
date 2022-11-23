@@ -9,7 +9,11 @@ module.exports = {
       cb(null, path.resolve(__dirname, "..", "..", "..","..", "objects-behavior-visual-analysis-system", "uploadFiles"));
     },
     filename: (req, file, cb) => {
-      file.key = `${file.originalname}`;
+      if(file.originalname.includes('.mp4'))
+        file.key = 'video.mp4';
+      else 
+        file.key = `${file.originalname}`;
+
       cb(null, file.key);
     }
   }),
