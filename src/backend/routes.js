@@ -16,8 +16,7 @@ routes.get("/videoProcess", async (req, res) => {
     if (error || stderr) {
      console.log('error',error)
     } else {
-      console.log(stdout)
-    
+  
       res.send(stdout)
     }
   })

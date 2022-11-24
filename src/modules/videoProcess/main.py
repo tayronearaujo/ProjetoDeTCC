@@ -5,18 +5,19 @@ def handleInitFile():
     if os.path.isdir(dirPathName): 
         try:
             os.rmdir(dirPathName)
-            # print("File deleted !")  
-
         except OSError as e:
             print(f"Error:{ e.strerror}")
-   
+    
     os.mkdir(dirPathName)
-    # print("File created!") 
+   
 
-# dirPathName = '../../backend/frames'
-dirPathName = 'C:/Users/Tayrone/Desktop/ufu/Tcc/tcc/src/backend/frames'
+
+dirPathName = 'C:/Users/Tayrone/Desktop/ufu/Tcc/objects-behavior-visual-analysis-system/uploadFiles/frames'
+videoPathName = 'C:/Users/Tayrone/Desktop/ufu/Tcc/objects-behavior-visual-analysis-system/uploadFiles/video.mp4'
 handleInitFile()
-vidcap = cv2.VideoCapture('video.mp4')
+
+vidcap = cv2.VideoCapture(videoPathName)
+
 count = 0
 while True:
     success,image = vidcap.read()
