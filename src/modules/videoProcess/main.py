@@ -10,14 +10,11 @@ def handleInitFile():
     
     os.mkdir(dirPathName)
    
-
-
 dirPathName = 'C:/Users/Tayrone/Desktop/ufu/Tcc/objects-behavior-visual-analysis-system/uploadFiles/frames'
 videoPathName = 'C:/Users/Tayrone/Desktop/ufu/Tcc/objects-behavior-visual-analysis-system/uploadFiles/video.mp4'
 handleInitFile()
 
 vidcap = cv2.VideoCapture(videoPathName)
-
 count = 0
 while True:
     success,image = vidcap.read()
@@ -27,5 +24,5 @@ while True:
     count += 1
 
 print(count)
-# print("{} images are extacted in {}.".format(count,dirPathName))
+
 

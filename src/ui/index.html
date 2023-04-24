@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="style.css">
    <script src="https://kit.fontawesome.com/b775c270a3.js" crossorigin="anonymous"></script>
   </head>
-
   <body>
-    
     <nav class="navbar">
       <a class="navbar__brand"> <img src="../assets/image.png" class="navbar__brand__img" alt="Logo UFU" /></a>
       <div class="navbar__search">
@@ -18,39 +16,18 @@
       </div>
       <a class="navbar__user"> <i class="fas fa-user-circle fa-2x"></i> </a>
     </nav>
-
     <main class="content">
       <section id="user__list" class="content__main">
         <div class="content_elements">
-          <select class="algorithm" id="menu-algorithm" selected="0" required></select>
-
-          <div class="file_info">
-            <h1 class="title">Para que o sistema funcione corretamente, é necessário:</h1>
-              <p>Arquivo de vídeo formato:</p>
-              <code>.mp4</code> 
-              <p>Arquivo com sua análise de frames formato: </p>
-              <code>.json</code> 
-          </div>
-          <button class="file_upload" id="drag-area-button" >Selecionar arquivos</button>
-          <input type="file" id="fileUpload" name="uploadFiles" multiple  hidden>
-          <!-- onchange="handleFile(this.files)" -->
-          <ul class="files_list" id="files-list">
-            <li class="files_list_row"> 
-              <i class="fa-sharp fa-solid fa-file-excel icon"></i>
-            </li>
-          </ul>
-
-          <div id="toast" class="content__toast">
-            <div class="content__toast__element" id="toast1">
-              <!-- <i class="fa-solid fa-circle-exclamation fa-1x"></i>
-              <span>&nbsp${status}</span> -->
-            </div>
-          </div>
-
-          <button class="saveButton" onclick="handleRequest()" id="uploadButton" disabled> Carregar sistema </button>
+          <h1 class="subtitle">Para prosseguir é necessário selecionar o tipo de análise desejada :</h1>
+          <select class="algorithm" id="menu-algorithm" onchange="setFileInfo()" required></select>
+         
+          <section id ="file-config" class="file_config"></section> 
         </div>  
       </section>
+    
     </main>
+    <script src="../../config.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
