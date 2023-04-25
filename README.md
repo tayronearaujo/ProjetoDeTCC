@@ -1,7 +1,8 @@
 # Sistema de análise visual de objetos em vídeos de vigilância
 
 O sistema foi desenvolvido com intuito de acomodar os mais diversos sitemas de análise visual de objetos em vídeos de vigilância, bem como suas configuracões e dependências.
-Ele esta previamente configurado para atender o sistema de mestrado desenvolvido pela Cibele.
+Ele está previamente configurado para atender o sistema de mestrado desenvolvido pela Cibele.
+
 ## Pré-requisitos
 
 * Node na versão mais recente
