@@ -23,7 +23,6 @@ Ele esta previamente configurado para atender o sistema de mestrado desenvolvido
 ## Instalando
 
 Antes de rodar a aplicação, é necessário instalar as dependências do projeto. Para isso, execute o seguinte comando no terminal:
-
 `npm install`
 
 ## Scripts
@@ -31,7 +30,6 @@ Antes de rodar a aplicação, é necessário instalar as dependências do projet
 O projeto possui os seguintes scripts configurados no arquivo `package.json`:
 
 - `dev`: Inicia o servidor em modo de desenvolvimento utilizando o nodemon para reiniciar automaticamente o servidor quando houver mudanças no código. Para executar, utilize o seguinte comando na pasta ./backend:
-
 `npm run dev`
 
 ## 🚀 Inicializacao 
