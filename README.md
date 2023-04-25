@@ -36,11 +36,14 @@ O projeto possui os seguintes scripts configurados no arquivo `package.json`:
 
 ## 🚀 Inicializacao 
 
-* Arquivo de configuracoes config.js
-Para adicionar qualquer sistema e necessario preencher as configuracoes corretamente no arquivo config.js
+* Arquivo de configurações: Para adicionar qualquer sistema e necessário preencher as configurações corretamente no arquivo config.js
+
 ## Monografia de mestrado Cibele
 
 https://repositorio.ufu.br/bitstream/123456789/32812/5/AnaliseVisualComportamento.pdf
+
+## Projeto Cibele
+https://github.com/cibelemara/objects-behavior-visual-analysis-system
 
 ## Utils
 
