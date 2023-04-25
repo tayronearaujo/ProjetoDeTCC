@@ -63,3 +63,56 @@ function showFile() {
     dragText.textContent = "Drag & Drop to Upload File";
   }
 }
+
+// async function handleConfig() {
+//   try {
+//     const response = await fetch('config.json');
+//     if (!response.ok) {
+//       throw new Error(`HTTP error: ${response.status}`);
+//     }
+//     const data = await response.json();
+//     setSelectOptions(data)
+//   }
+//   catch (error) {
+//     console.error(`Could not get data: ${error}`);
+//   }
+// }
+
+
+// const asynchronousFunction = callback => {
+//   return fetch('./config.json')
+//     .then(response => response.json())
+//     .then(json => {
+//       callback(json);
+//     }).catch(err => {
+//       console.error('fetch failed', err);
+//     });
+// }
+
+// async function asynchronousFunction() {
+//   try {
+//     const response = await fetch('./config.json');
+//     if (!response.ok) {
+//       throw new Error(`HTTP error: ${response.status}`);
+//     }
+//     //callback(await response.json());
+//     const data = await response.json()
+//     console.log(data)
+
+//     return Promise.resolve(data)
+
+//   } catch (err) {
+//     console.log('fetch failed', err);
+//   }
+// }
+
+// const callbackFunction = result => {
+//   console.log(result)
+//   return result
+// }
+
+// const mainFunction = callback => {
+//   asynchronousFunction(callback)
+// }
+
+//mainFunction(callbackFunction)

@@ -1,19 +1,26 @@
+
+const { execFile } = require('child_process');
+// const util = require("util");
 const routes = require("express").Router();
 const multer = require("multer");
 const multerConfig = require("./config/multer");
 
-routes.post("/posts", multer(multerConfig).single("file"), async (req, res) => {
-  const {originalName, mimetype, filename} = req;
 
+routes.post("/upload", multer(multerConfig).array("uploadFiles", 2), async (req, res) => {
+  console.log("req.files",req.files)
+  console.log("req.file",req.file)
 
-  const reqObjetct = {
-    fileName: originalName,
-    fileType: mimetype,
-    savedFileName: filename
-  }
-
-  return res.json({response: reqObjetct});
+  return res.json("Sucess send files");
 });
 
+routes.get("/videoProcess", async (req, res) => {
+  const py = execFile('python', ['src/modules/videoProcess/main.py'], (error, stdout, stderr) => {
+    if (error || stderr) {
+     console.log('error',error)
+    } else {
+      res.send(stdout)
+    }
+  })
+});
 
 module.exports = routes;

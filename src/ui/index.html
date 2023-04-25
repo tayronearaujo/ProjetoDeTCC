@@ -8,61 +8,26 @@
     <link rel="stylesheet" href="style.css">
    <script src="https://kit.fontawesome.com/b775c270a3.js" crossorigin="anonymous"></script>
   </head>
-
   <body>
     <nav class="navbar">
-      <a hidden id="sideBar__icon" class="navbar__mobile" onclick="openSidebar()"> <i
-          class="fas fa-align-justify fa-2x"></i></a>
       <a class="navbar__brand"> <img src="../assets/image.png" class="navbar__brand__img" alt="Logo UFU" /></a>
       <div class="navbar__search">
-        <input id="user__search" class="navbar__search__input" type="search" placeholder="Buscar">
-        <i class="fas fa-search navbar__search__input__icon"></i>
+        <h1 class="title">Sistema de análise visual de objetos em vídeos de vigilância</h1>
       </div>
       <a class="navbar__user"> <i class="fas fa-user-circle fa-2x"></i> </a>
     </nav>
-
     <main class="content">
-      <!-- <nav id="sideBar" class="content__sidebar">
-        <ul class="content__sidebar__list">
-          <li id="list__attended" class="content__sidebar__list__item" onclick="renderProject('cibele')">
-            <i class="fa-solid fa-diagram-project "></i>
-            Layout Cibele
-          </li>
-          <li id="list__thash" class="content__sidebar__list__item" onclick="">
-            <i class="fa-solid fa-diagram-project "></i>
-            Layout Gilson
-          </li>
-        </ul>
-      </nav> -->
-     
-      <div id="toast" class="content__toast"></div>
-
       <section id="user__list" class="content__main">
-        <div class="content_main_list">
-          <div class="title">
-            Sistema de análise visual de objetos em vídeos de vigilância
-          </div>
-          <div class="content__input">
-            <select class="algorithm" id="menu-algorithm" selected="0">
-              <option class="algorithm-option" value="0">Objects behavior visual analysis system</option>
-              <!-- <option class="algorithm-option" value="1">Alphabeta</option> -->
-            </select>
-          </div>
-          <div class="drag-area">
-            <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
-            <header>Arraste e solte para carregar um arquivo</header>
-            <span>ou</span>
-            <button id="drag-area-button">Escolha um arquivo</button>
-            <input type="file" id="fileUpload" hidden>
-          </div>
-
-          <div class="button_content">
-            <button class="saveButton" onclick="handleRequest()" id="uploadButton"> Carregar sistema </button>
-          </div>
-     
+        <div class="content_elements">
+          <h1 class="subtitle">Para prosseguir é necessário selecionar o tipo de análise desejada :</h1>
+          <select class="algorithm" id="menu-algorithm" onchange="setFileInfo()" required></select>
+         
+          <section id ="file-config" class="file_config"></section> 
         </div>  
       </section>
+    
     </main>
+    <script src="../../config.js"></script>
     <script src="index.js"></script>
   </body>
 </html>
