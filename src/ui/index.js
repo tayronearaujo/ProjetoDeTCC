@@ -33,19 +33,11 @@ document.addEventListener("click", e => {
   }
 });
 
-//index.html?file1=http://localhost:8080/diretorioBackend/detections.json&file2=http://localhost:8080/diretorioBackend/videos.mp4
-
 const handleUploadFilesParams = (destination, text) =>{
   return text.replace(/destination/g, destination);
 }
 
 const renderProject = (type, query) => {
-
-  const analysisBase1 = {
-    0: `<iframe src="http://127.0.0.1:5501/index.html?directory=http://localhost:8080/diretorioBackend/detections.json" class="iframe"></iframe>`,
-    1: `<iframe src="http://127.0.0.1:5502/index.html" class="iframe"></iframe>`,
-    2: `<iframe src="http://127.0.0.1:5503/index.html" class="iframe"></iframe>`
-  }
 
   const projectIframe = `
     <iframe 
@@ -202,8 +194,9 @@ const handleRequest = async () => {
   for (var i = 0; i < filesListLength; i++) {
     formData.append('uploadFiles', uploadFiles[i])
     uploadQueryFilesData = uploadQueryFilesData + `file${i + 1}=destination${uploadFiles[i].name}&`
-  
   }
+  
+  //console.log(`src=${config[parseInt(algorithm.value)].serverDirectory}?${handleUploadFilesParams(config[parseInt(algorithm.value)].destinationApiFiles, uploadQueryFilesData)}`)
 
   try {
     const response = fetch('http://localhost:3000/upload', {
@@ -212,7 +205,7 @@ const handleRequest = async () => {
     })
 
    const responseApi = await response
-    //renderProject(parseInt(algorithm.value), uploadQueryFilesData)
+
     if(responseApi.status === 200){
       renderProject(parseInt(algorithm.value), uploadQueryFilesData)
     }
@@ -220,33 +213,7 @@ const handleRequest = async () => {
   } 
   catch (error) {
     console.log("erro", error)
-    //creatToast('toast_error', 'Erro ao enviar arquivos !')
   }
-
-  // if(filesListLength === 2){
-  //   try {
-  //     const response = fetch('http://localhost:3000/upload', {
-  //       method: 'POST',
-  //       body: formData
-  //     })
-
-  //     const responseApi = await response
-    
-  //     if(responseApi.status === 200){
-  //       console.log('status 200')
-  //       renderProject(parseInt(algorithm.value))
-  //     }
-
-  //   } catch (error) {
-  //     creatToast('toast_error', 'Erro ao enviar arquivos !')
-  //   }
-  // }
-  // else {
-  //   console.log('erro')
-  // // filesListLength > 2 ? 
-  // //   creatToast('toast_error', 'Muitos arquivos selecionados para envio !') :
-  // //   creatToast('toast_error', `E necessário enviar mais de ${filesListLength} arquivo !`) 
-  // }
 }
 
 //toast type - toast_error / toast_warning / toast_success

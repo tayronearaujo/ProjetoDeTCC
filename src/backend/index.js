@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const { spawn } = require('child_process');
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -14,10 +14,10 @@ app.use(morgan("dev"));
 
 const upload = multer(
   {
-    dest: path.resolve(__dirname, "..","/"),
+    dest: path.resolve(__dirname, ".","/"),
     storage: multer.diskStorage({
       destination: (req, file, cb) => {  
-        cb(null, path.resolve("../diretorioBackend"));
+        cb(null, path.resolve("src/modules/videoProcess/uploadFiles"));
       },
       filename: (req, file, cb) => {
         cb(null, file.originalname);
@@ -27,51 +27,37 @@ const upload = multer(
 );
 
 app.post("/upload", upload.array("uploadFiles"), (req, res) => {
-    // const tempPath = req.file.path;
-    // const targetPath = path.join(__dirname);
-    // console.log('tempPath ->',tempPath)
-    // console.log('targetPath ->',targetPath)
-    console.log(req.files)
+   
+  if (req.files) {
+    console.log(`${req.files.length} arquivos recebidos com sucesso!`);
+    res.status(200).send(`${req.files.length} arquivos recebidos com sucesso!`);
+  } else {
+    console.log('Nenhum arquivo foi enviado.');
+    res.status(400).send('Nenhum arquivo foi enviado.');
+  }
 
-    res
-    .status(200)
-    .end("File uploaded!");
-
-    // if (path.extname(req.file.originalname).toLowerCase() === ".png") {
-    //   fs.rename(tempPath, targetPath, err => {
-    //     if (err) return handleError(err, res);
-
-    //     res
-    //       .status(200)
-    //       .contentType("text/plain")
-    //       .end("File uploaded!");
-    //   });
-    // } else {
-    //   fs.unlink(tempPath, err => {
-    //     if (err) return handleError(err, res);
-
-    //     res
-    //       .status(403)
-    //       .contentType("text/plain")
-    //       .end("Only .png files are allowed!");
-    //   });
-    // }
   }
 );
 
-app.get("/videoProcess", async (req, res) => {
-  res
-  .status(200)
-  .end("File uploaded!");
-  // const py = execFile('python', ['src/modules/videoProcess/main.py'], (error, stdout, stderr) => {
-  //   if (error || stderr) {
-  //    console.log('error',error)
-  //   } else {
-  //     res.send(stdout)
-  //   }
-  // })
+app.post('/run-python', (req, res) => {
+  const pythonFile = 'src/modules/videoProcess/main.py';
+
+  const pythonProcess = spawn('python', [pythonFile]);
+
+  pythonProcess.stdout.on('data', (data) => {
+    console.log(`Saída do Python: ${data}`);
+  });
+
+  pythonProcess.stderr.on('data', (data) => {
+    console.error(`Erro do Python: ${data}`);
+  });
+
+  pythonProcess.on('close', (code) => {
+    console.log(`Processo Python encerrado com código de saída ${code}`);
+    res.status(200).send(`Processo Python encerrado com código de saída ${code}`);
+  });
 });
 
-//app.use(require("./routes"));
-
-app.listen(3000);
+app.listen(3000, () => {
+  console.log('Servidor ouvindo na porta 3000');
+});

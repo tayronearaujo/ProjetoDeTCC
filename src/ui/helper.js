@@ -5,9 +5,7 @@ const button = dropArea.querySelector("button");
 const input = dropArea.querySelector("input");
 let file;
 
-
 const inputFileElement = document.querySelector("#fileUpload");
-
 
 button.onclick = () => {
   input.click();
@@ -116,3 +114,32 @@ function showFile() {
 // }
 
 //mainFunction(callbackFunction)
+
+
+
+
+
+  // if(filesListLength === 2){
+  //   try {
+  //     const response = fetch('http://localhost:3000/upload', {
+  //       method: 'POST',
+  //       body: formData
+  //     })
+
+  //     const responseApi = await response
+    
+  //     if(responseApi.status === 200){
+  //       console.log('status 200')
+  //       renderProject(parseInt(algorithm.value))
+  //     }
+
+  //   } catch (error) {
+  //     creatToast('toast_error', 'Erro ao enviar arquivos !')
+  //   }
+  // }
+  // else {
+  //   console.log('erro')
+  // // filesListLength > 2 ? 
+  // //   creatToast('toast_error', 'Muitos arquivos selecionados para envio !') :
+  // //   creatToast('toast_error', `E necessário enviar mais de ${filesListLength} arquivo !`) 
+  // }
