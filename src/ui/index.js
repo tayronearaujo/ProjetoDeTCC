@@ -39,9 +39,11 @@ const handleUploadFilesParams = (destination, text) =>{
 
 const renderProject = (type, query) => {
 
+//src=${config[type].serverDirectory}?${handleUploadFilesParams(config[type].destinationApiFiles, query)}
+
   const projectIframe = `
     <iframe 
-      src=${config[type].serverDirectory}?${handleUploadFilesParams(config[type].destinationApiFiles, query)}
+      src=${config[type].serverDirectory}
       class="iframe"
     ></iframe>
   `

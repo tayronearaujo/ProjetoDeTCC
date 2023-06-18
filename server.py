@@ -10,9 +10,12 @@ class CORSRequestHandler(http.server.SimpleHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         super().end_headers()
 
+class MyTCPServer(socketserver.TCPServer):
+    allow_reuse_address = True
+
 def start_server():
     PORT = 8080
-    with socketserver.TCPServer(("", PORT), CORSRequestHandler) as httpd:
+    with MyTCPServer(("", PORT), CORSRequestHandler) as httpd:
         print("Servindo na porta", PORT)
         httpd.serve_forever()
 
@@ -25,16 +28,13 @@ def stop_server(signal, frame):
     httpd.shutdown()
     httpd.server_close()
 
-# Inicia o servidor em uma thread separada
+
 server_thread = threading.Thread(target=start_server)
 server_thread.start()
 
-# Mantém o servidor ativo em outra thread
 keep_alive_thread = threading.Thread(target=keep_alive)
 keep_alive_thread.start()
 
-# Configura o sinal para parar o servidor
 signal.signal(signal.SIGINT, stop_server)
 
-# Aguarda até o encerramento do servidor
 server_thread.join()
